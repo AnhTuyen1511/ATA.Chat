@@ -1,4 +1,4 @@
-package com.ATA.chat;
+package com.ata.chat;
 
 public class User {
 	private String userID;
@@ -15,17 +15,13 @@ public class User {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
-		this.password = password;
+		this.password =password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 	}
-	
+
 	public String getUserID() {
 		return userID;
-	}
-
-	public void setUserID(String userID) {
-		this.userID = userID;
 	}
 
 	public String getLastName() {
