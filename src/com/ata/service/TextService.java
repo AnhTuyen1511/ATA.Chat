@@ -1,11 +1,11 @@
-package com.ata.chat;
+package com.ata.service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Hashing {
-	public static String hashText(String password) {
+public class TextService {
+	public static String hashMD5(String password) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] messageDigest = md.digest(password.getBytes());
