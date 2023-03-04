@@ -1,17 +1,24 @@
 package com.ata.chat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Group {
-//
-//	List<User> users = respository.getAll();
-//	void addUser(String hash) {
-//		for( int index = 0; index < users.size();index++) {
-//			if(users.get(index).getUserID()!=user.getUserID()) {
-//				return;
-//			}
-//		}
-//		users.add(user);
-//	}
-
+	private String name;
+	private ArrayList<User> users;
+	
+	public Group(String name) {
+		name = name;
+		this.users = new ArrayList<>();
+	}
+	public void addUser(User user) {
+		this.users.add(user);
+	}
+	public ArrayList<User> getUsers(){
+		return this.users;
+	}
+	public String getName() {
+		return name;
+	}
+	
 }

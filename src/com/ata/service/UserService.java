@@ -15,34 +15,22 @@ public class UserService {
 		data = database;
 	}
 
-	public void addUser(String username, String paasword) {
-		
-//		String password=hash_password.hashPass(user.getPassword());
-//		user.setPassword(password);
-//		data.users.add(user);
-//		repositoryUser.add(user);
+	public boolean addUser(String username, String password) {
+		User existing = data.getUsers().getFirst(user -> user.getUserName().equals(username));
+		if (existing != null) {
+			return false;
+		}
+
+		User newUser = new User(username, password);
+		data.getUsers().add(newUser);
+		return true;
 	}
 
-	public boolean login(String userName, String password) {
-		List<User> users = data.users.getEntity();
-		for (int index = 0; index < users.size(); index++) {
-			String userName2 = users.get(index).getUserName();
-			String password2 = users.get(index).getPassword();
-			if (userName2.equals(userName) && password2.equals(password)) {
-				return true;
-			}
+	public boolean login(String username, String password) {
+		User attemptedUser = data.getUsers().getFirst(user -> user.getUserName().equals(username));
+		if (attemptedUser == null) {
+			return false;
 		}
-		return false;
-	}
-	
-	public User getFirst(String username,List<User> users) {
-		int index;
-		users = data.users.getEntity();
-		for(index = 0; index < users.size(); index++) {
-			if(users.get(index).getUserName().equals(username)) {
-				break;
-			}
-		}
-		return users.get(index);
+		return attemptedUser.login(password);
 	}
 }
