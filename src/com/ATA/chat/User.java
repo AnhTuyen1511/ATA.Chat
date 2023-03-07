@@ -22,6 +22,7 @@ public class User {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 	}
+	
 
 	private String hash(String text) {
 		TextService textService = new TextService();

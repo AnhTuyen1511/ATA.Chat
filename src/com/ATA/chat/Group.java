@@ -7,6 +7,7 @@ public abstract class Group {
 	private String name;
 	private ArrayList<User> users;
 	private ArrayList<File> files;
+	private boolean isPrivate;
 	
 	public Group(String name) {
 		name = name;
@@ -24,4 +25,11 @@ public abstract class Group {
 	public ArrayList<File> getFiles(){
 		return this.files;
 	}
+	public boolean isPrivate() {
+		return isPrivate;
+	}
+	public void setPrivate(boolean isPrivate) {
+		this.isPrivate = isPrivate;
+	}
+	
 }

@@ -11,7 +11,7 @@ public class Database {
 	public Repository<Group> groups = new Repository<Group>() {
 	};
 
-	public static synchronized Database getInstance() {
+	public static Database getInstance() {
 		if (instance == null) {
 			instance = new Database();
 		}

@@ -1,6 +1,8 @@
 package com.ata.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import com.ata.chat.Group;
@@ -11,15 +13,34 @@ import com.ata.data.Database;
 public class GroupService {
 	Database data = new Database();
 
-	public void createGroup(String name) {
+	public void createPublicGroup(String name) {
 		String joinCode = generateJoinCode();
-		PublicGroup publicGroup = new PublicGroup(name, joinCode);
+		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
 		System.out.println(joinCode);
 		data.groups.add(publicGroup);
+	
 	}
 
-	public void joinGroup(User user, String joinCode){
+	public void joinGroup(User user,String joinCode) {
+		 List <PublicGroup> listPublicGroups = getListPublicGroups();
 		
+		for (int index = 0; index < listPublicGroups.size(); index++) {
+			if(listPublicGroups.get(index).getJoinCode().equals(joinCode)) {
+				listPublicGroups.get(index).addUser(user);
+			}
+		}
+
+	}
+	
+	public List<PublicGroup> getListPublicGroups(){
+		List<Group> listGroups=data.groups.listEntities;
+		List<PublicGroup> listPublicGroups = new ArrayList<>();
+		for (int index = 0; index < listGroups.size(); index++) {
+			if(!listGroups.get(index).isPrivate()) {
+				listPublicGroups.add((PublicGroup)listGroups.get(index));
+			}
+		}
+		return listPublicGroups;
 	}
 
 	private String generateJoinCode() {

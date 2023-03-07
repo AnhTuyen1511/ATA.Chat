@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.ata.chat.User;
@@ -50,7 +49,6 @@ class UserServiceTest {
 		List<User> expectedUsers = new ArrayList<>();
 		expectedUsers.add(user1);
 		expectedUsers.add(user2);
-		UserService userService = new UserService(database);
 		List<User> actualUsers = userService.findUsersByUserName("Doe");
 		assertEquals(expectedUsers, actualUsers);
 	}
