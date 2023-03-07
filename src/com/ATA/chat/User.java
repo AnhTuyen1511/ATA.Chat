@@ -1,4 +1,6 @@
-package com.ATA.chat;
+package com.ata.chat;
+
+import com.ata.service.TextService;
 
 public class User {
 	private String userID;
@@ -8,24 +10,40 @@ public class User {
 	private String password;
 	private String gender;
 	private String dateOfBirth;
-	
+	private String hashedPass;
+
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
 		this.userID = userID;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
-		this.password = password;
+		this.password =password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	public String getUserID() {
-		return userID;
+
+	private String hash(String text) {
+		TextService textService = new TextService();
+		return textService.hashMD5(text);
 	}
 
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public User(String userName, String password) {
+		userName = userName;
+		password = hash(password);
+	}
+
+	public boolean login(String password) {
+		String hashedInputPass = hash(password);
+		if (this.password.equals(hashedInputPass)) {
+			return true;
+		}
+		return false;
+	}
+
+	public String getUserID() {
+		return userID;
 	}
 
 	public String getLastName() {
@@ -75,5 +93,4 @@ public class User {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
 }
