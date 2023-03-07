@@ -4,33 +4,25 @@ import com.ata.chat.Group;
 import com.ata.chat.User;
 
 public class Database {
-<<<<<<< HEAD
-	private static Database instance=null;
-	
-	public Repository<User> users =new Repository<User>();
-	public Repository<Group> groups =new Repository<Group>();
-	public static synchronized Database getInstance() {
-		if(instance==null) {
-			instance=new Database();
-			
-		}
-		return instance;
-	}
-=======
-	
 	private static Database instance = null;
-	public Repository<User> users = new Repository<User>() {};
-	
-	public Repository<Group> groups = new Repository<Group>() {};
-	
+
+	public Repository<User> users = new Repository<User>() {
+	};
+	public Repository<Group> groups = new Repository<Group>() {
+	};
+
 	public static synchronized Database getInstance() {
 		if (instance == null) {
 			instance = new Database();
 		}
 		return instance;
 	}
-	 public Repository<User> getUsers() {
-	        return users;
-	    }
->>>>>>> origin/Phuonganh
+
+	public Repository<User> getUsers() {
+		return users;
+	}
+	
+	public Repository<Group> getGroups(){
+		return groups;
+	}
 }

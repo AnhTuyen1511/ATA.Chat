@@ -2,9 +2,8 @@ package com.ata.chat;
 
 public class PrivateGroup extends Group {
 	private User admin;
-	public PrivateGroup(String name, User admin) {
+	public PrivateGroup(String name) {
 		super(name);
-		this.admin = admin;
 	}
 	public User getAdmin() {
 		return admin;
