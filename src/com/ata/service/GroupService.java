@@ -64,6 +64,8 @@ public class GroupService {
 		}
 		return sb.toString();
 	}
+	
+	
 
 	public Group getGroupById(String GroupID) {
 		List<Group> listGroups = data.groups.listEntities;
