@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import com.ata.service.TextService;
-
 public class User {
 	private String userID;
 	private String lastName;
@@ -30,23 +28,23 @@ public class User {
 		messages = new ArrayList<>();
 	}
 
-	private String hash(String text) {
-		TextService textService = new TextService();
-		return textService.hashMD5(text);
-	}
-
-	public User(String userName, String password) {
-		userName = userName;
-		password = hash(password);
-	}
-
-	public boolean login(String password) {
-		String hashedInputPass = hash(password);
-		if (this.password.equals(hashedInputPass)) {
-			return true;
-		}
-		return false;
-	}
+//	private String hash(String text) {
+//		TextService textService = new TextService();
+//		return textService.hashMD5(text);
+//	}
+//
+//	public User(String userName, String password) {
+//		userName = userName;
+//		password = hash(password);
+//	}
+//
+//	public boolean login(String password) {
+//		String hashedInputPass = hash(password);
+//		if (this.password.equals(hashedInputPass)) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public String getUserID() {
 		return userID;
