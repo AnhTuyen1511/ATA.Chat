@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Group {
+	private String groupID;
 	private String name;
 	private ArrayList<User> users;
 	private ArrayList<File> files;
@@ -13,14 +14,14 @@ public abstract class Group {
 		name = name;
 		this.users = new ArrayList<>();
 	}
+	
+	public String getGroupID() {
+		return groupID;
+	}
 
 	public void addUser(User user) {
 		this.users.add(user);
 	}
-
-//	public ArrayList<User> getUsers() {
-//	
-//	}
 
 	public void removeUser(User user) {
 		this.users.remove(user);
@@ -44,5 +45,6 @@ public abstract class Group {
 	public void setPrivate(boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
+
 
 }
