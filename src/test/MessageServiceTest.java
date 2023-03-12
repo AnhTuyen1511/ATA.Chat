@@ -46,7 +46,7 @@ class MessageServiceTest {
 		User user = new User("anh", "password123");
 		String joinCode = groupService.generateJoinCode();
 		PublicGroup group= new PublicGroup("balabla",joinCode, false);
-//		group.setMessages();
+		group.setMessages();
 		messageService.sendMessagetoGroup(user, group, "bla bla bla");
 		boolean actualResult=group.getMessage(user,"bla bla bla");
 		assertEquals(true, actualResult);
@@ -67,7 +67,8 @@ class MessageServiceTest {
 	@Test
 	void deleteMessageToGroup() {
 		User user = new User("JohnDoe", "password123");
-		PublicGroup group = new PublicGroup("balabla", false);
+		String joinCode = groupService.generateJoinCode();
+		PublicGroup group = new PublicGroup("balabla",joinCode, false);
 		group.setMessages();
 		Message message = new Message(user, group, "hello group");
 		messageService.deleteMessage(message);

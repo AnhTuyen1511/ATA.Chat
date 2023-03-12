@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.ata.chat.File;
 import com.ata.chat.Group;
 import com.ata.chat.Message;
@@ -12,7 +11,11 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class MessageService {
-	Database data;
+	private final Database data;
+	
+	public MessageService(Database data) {
+		this.data = data;
+	}
 
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
 		Message message = new Message(sender, group, messageContent);

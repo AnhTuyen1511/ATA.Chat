@@ -109,6 +109,7 @@ public class User extends BaseEntity {
 	public List<Message> getMessages() {
 		return messages;
 	}
+	
 	public boolean getMessage(User user, String contentMessage) {
 		List<Message> messagesOfSender= new ArrayList<>();
 		for(Message message: messages) {
