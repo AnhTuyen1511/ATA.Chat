@@ -6,7 +6,11 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class UserService {
-	public Database data;
+
+//	public Database data;
+
+	private final Database data;
+
 
 	public UserService(Database database) {
 			data=database;
@@ -41,4 +45,5 @@ public class UserService {
 	    }
 	    return matchingUsers;
 	}
+
 }
