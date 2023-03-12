@@ -1,9 +1,9 @@
 package com.ata.chat;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Group {
+	private String groupID;
 	private String name;
 	private ArrayList<User> users;
 	private ArrayList<File> files;
@@ -22,6 +22,9 @@ public abstract class Group {
 	public ArrayList<User> getUsers() {
 		return this.users;
 	}
+	public void removeUser(User user) {
+		this.users.remove(user);
+	}
 
 	public String getName() {
 		return name;
@@ -37,6 +40,10 @@ public abstract class Group {
 
 	public void setPrivate(boolean isPrivate) {
 		this.isPrivate = isPrivate;
+	}
+
+	public String getGroupID() {
+		return groupID;
 	}
 
 	public ArrayList<Message> getMessages() {

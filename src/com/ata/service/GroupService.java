@@ -36,12 +36,11 @@ public class GroupService {
 		Group group;
 		group = this.getGroupById(groupID);
 		if (group != null) {
-			group.removeUser(userID);	
+			group.removeUser(userID);
 			return true;
 		}
 		return false;
 	}
-	
 
 	public List<PublicGroup> getListPublicGroups() {
 		List<Group> listGroups = data.groups.listEntities;
@@ -64,8 +63,6 @@ public class GroupService {
 		}
 		return sb.toString();
 	}
-	
-	
 
 	public Group getGroupById(String GroupID) {
 		List<Group> listGroups = data.groups.listEntities;
