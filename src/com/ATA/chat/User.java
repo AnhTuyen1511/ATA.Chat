@@ -101,15 +101,15 @@ public class User extends BaseEntity {
 	public List<Message> getMessages() {
 		return messages;
 	}
-	
+
 	public boolean getMessage(User user, String contentMessage) {
-		List<Message> messagesOfSender= new ArrayList<>();
-		for(Message message: messages) {
-			if(message.sender==user&&contentMessage.equals(message.messageContent)) {
+		List<Message> messagesOfSender = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.sender == user && contentMessage.equals(message.messageContent)) {
 				return true;
 			}
 		}
-		return  false;
+		return false;
 	}
 
 	public void setMessages(List<Message> messages) {
