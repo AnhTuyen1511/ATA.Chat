@@ -4,8 +4,9 @@ public class File {
 	private String name;
 	private String type;
 	private long size;
+	private String path;
 
-	public File(String name, String type, long size) {
+	public File(String name, String type, long size, String path) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -19,6 +20,5 @@ public class File {
 	public String getName() {
 		return name;
 	}
-	
 
 }

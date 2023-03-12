@@ -1,6 +1,7 @@
 package com.ata.data;
 
 import com.ata.chat.Group;
+import com.ata.chat.Message;
 import com.ata.chat.User;
 
 public class Database {
@@ -9,6 +10,8 @@ public class Database {
 	public Repository<User> users = new Repository<User>() {
 	};
 	public Repository<Group> groups = new Repository<Group>() {
+	};
+	public Repository<Message> messages = new Repository<Message>() {
 	};
 
 	public static Database getInstance() {
@@ -24,5 +27,8 @@ public class Database {
 	
 	public Repository<Group> getGroups(){
 		return groups;
+	}
+	public Repository<Message> getMessages(){
+		return messages;
 	}
 }

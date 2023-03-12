@@ -1,7 +1,10 @@
 package com.ata.chat;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import com.ata.service.TextService;
-
 public class User {
 	private String userID;
 	private String lastName;
@@ -11,6 +14,7 @@ public class User {
 	private String gender;
 	private String dateOfBirth;
 	private String hashedPass;
+	private List<Message> messages;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
@@ -18,11 +22,11 @@ public class User {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
-		this.password =password;
+		this.password = password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
+		messages = new ArrayList<>();
 	}
-	
 
 	private String hash(String text) {
 		TextService textService = new TextService();
@@ -92,5 +96,23 @@ public class User {
 
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+
+	public void addMessage(Message message) {
+		messages.add(message);
+	}
+
+	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
+		List<Message> listMessases;
+		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
+		return listMessases;
 	}
 }
