@@ -12,7 +12,7 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class MessageService {
-	Database data = new Database();
+	Database data;
 
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
 		Message message = new Message(sender, group, messageContent);

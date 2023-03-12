@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ata.chat.User;
 import com.ata.data.Database;
+import com.ata.data.InMemoryDatabase;
 import com.ata.service.UserService;
 
 class UserServiceTest {
@@ -18,7 +19,7 @@ class UserServiceTest {
 
 	@BeforeEach
 	public void setUp() {
-		database = Database.getInstance();
+		database = InMemoryDatabase.getInstance();
 		userService = new UserService(database);
 	}
 
@@ -32,7 +33,6 @@ class UserServiceTest {
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
-
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);
 	}
@@ -71,3 +71,4 @@ class UserServiceTest {
 	}
 
 }
+

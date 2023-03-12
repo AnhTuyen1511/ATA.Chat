@@ -1,7 +1,7 @@
 package com.ata.chat;
 import java.util.ArrayList;
 
-public abstract class Group {
+public abstract class Group extends BaseEntity {
 	private String groupID;
 	private String name;
 	private ArrayList<User> users;
@@ -10,7 +10,7 @@ public abstract class Group {
 	private boolean isPrivate;
 
 	public Group(String name) {
-		name = name;
+		this.name = name;
 		this.users = new ArrayList<>();
 	}
 
@@ -21,8 +21,8 @@ public abstract class Group {
 	public ArrayList<User> getUsers() {
 		return this.users;
 	}
-	public void removeUser(User user) {
-		this.users.remove(user);
+	public boolean removeUser(User user) {
+		return this.users.remove(user);
 	}
 
 	public String getName() {

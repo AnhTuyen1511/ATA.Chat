@@ -1,7 +1,6 @@
 package com.ata.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -11,39 +10,33 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class GroupService {
-	Database data = new Database();
+	private final Database data;
 
-	public void createPublicGroup(String name) {
-		String joinCode = generateJoinCode();
-		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
-		System.out.println(joinCode);
-		data.groups.add(publicGroup);
-
+	public GroupService(Database data) {
+		this.data = data;
 	}
 
-	public void joinGroup(User user, String joinCode) {
-		List<PublicGroup> listPublicGroups = getListPublicGroups();
+	public String createPublicGroup(String name) {
+		String joinCode = generateJoinCode();
+		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
+		data.groups.add(publicGroup);
+		return joinCode;
+	}
 
+	public boolean joinGroup(User user, String joinCode) {
+		List<PublicGroup> listPublicGroups = getListPublicGroups();
+		boolean success = false;
 		for (int index = 0; index < listPublicGroups.size(); index++) {
 			if (listPublicGroups.get(index).getJoinCode().equals(joinCode)) {
 				listPublicGroups.get(index).addUser(user);
+				success = true;
 			}
 		}
-
-	}
-
-	public boolean removeUserFromGroup(User userID, String groupID) {
-		Group group;
-		group = this.getGroupById(groupID);
-		if (group != null) {
-			group.removeUser(userID);
-			return true;
-		}
-		return false;
+		return success;
 	}
 
 	public List<PublicGroup> getListPublicGroups() {
-		List<Group> listGroups = data.groups.listEntities;
+		List<Group> listGroups = data.groups.getListEntities();
 		List<PublicGroup> listPublicGroups = new ArrayList<>();
 		for (int index = 0; index < listGroups.size(); index++) {
 			if (!listGroups.get(index).isPrivate()) {
@@ -51,6 +44,28 @@ public class GroupService {
 			}
 		}
 		return listPublicGroups;
+	}
+
+	public boolean removeUserFromGroup(User userID, String groupName) {
+		Group group;
+		group = this.getGroupByName(groupName);
+		if (group != null) {
+			group.removeUser(userID);
+			return true;
+		}
+		return false;
+	}
+
+	public Group getGroupById(String GroupID) {
+		List<Group> listGroups = data.groups.getListEntities();
+		Group tempGroup;
+		for (int index = 0; index < listGroups.size(); index++) {
+			tempGroup = listGroups.get(index);
+			if (tempGroup.getGroupID().equalsIgnoreCase(GroupID)) {
+				return tempGroup;
+			}
+		}
+		return null;
 	}
 
 	private String generateJoinCode() {
@@ -64,16 +79,8 @@ public class GroupService {
 		return sb.toString();
 	}
 
-	public Group getGroupById(String GroupID) {
-		List<Group> listGroups = data.groups.listEntities;
-		Group tempGroup;
-		for (int index = 0; index < listGroups.size(); index++) {
-			tempGroup = listGroups.get(index);
-			if (tempGroup.getGroupID().equalsIgnoreCase(GroupID)) {
-				return tempGroup;
-			}
-		}
-		return null;
+	public Group getGroupByName(String groupName) {
+		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
 	}
 
 }
