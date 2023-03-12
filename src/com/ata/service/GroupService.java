@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.ata.chat.Group;
+import com.ata.chat.PrivateGroup;
 import com.ata.chat.PublicGroup;
 import com.ata.chat.User;
 import com.ata.data.Database;
@@ -46,11 +47,11 @@ public class GroupService {
 		return listPublicGroups;
 	}
 
-	public boolean removeUserFromGroup(User userID, String groupName) {
+	public boolean removeUserFromGroup(User user, String groupName) {
 		Group group;
 		group = this.getGroupByName(groupName);
 		if (group != null) {
-			group.removeUser(userID);
+			group.removeUser(user);
 			return true;
 		}
 		return false;

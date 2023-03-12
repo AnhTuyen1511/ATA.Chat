@@ -13,7 +13,6 @@ public class User extends BaseEntity {
 	private String password;
 	private String gender;
 	private String dateOfBirth;
-	private String hashedPass;
 	private List<Message> messages;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
