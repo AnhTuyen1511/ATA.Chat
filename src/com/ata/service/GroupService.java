@@ -14,10 +14,9 @@ public class GroupService {
 	Database data = new Database();
 
 	public void createPublicGroup(String name) {
-		String joinCode = generateJoinCode();
-//		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
-		System.out.println(joinCode);
-//		data.groups.add(publicGroup);
+		
+		PublicGroup publicGroup = new PublicGroup(name,  false);
+		data.groups.add(publicGroup);
 	
 	}
 
@@ -43,16 +42,7 @@ public class GroupService {
 		return listPublicGroups;
 	}
 
-	private String generateJoinCode() {
-		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		Random random = new Random();
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < 6; i++) {
-			int index = random.nextInt(alphanumeric.length());
-			sb.append(alphanumeric.charAt(index));
-		}
-		return sb.toString();
-	}
+
 	
 	
 

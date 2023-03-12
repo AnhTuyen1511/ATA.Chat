@@ -1,6 +1,9 @@
 package com.ata.chat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public abstract class Group {
 	private String groupID;
@@ -70,6 +73,7 @@ public abstract class Group {
 	public void setMessages() {
 		this.messages = new ArrayList<>();
 	}
+
 	public boolean getMessage(User user, String contentMessage) {
 		List<Message> messagesOfSender= new ArrayList<>();
 		for(Message message: messages) {
@@ -78,5 +82,21 @@ public abstract class Group {
 			}
 		}
 		return  false;
+	}
+	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
+		List<Message> listMessases;
+		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
+		return listMessases;
+	}
+	public void removeMessage(User sender, Message message) {
+		for(Message messageFromList: messages) {
+			String contentOfMessage=message.getMessageContent();
+			if(contentOfMessage.equals(messageFromList.messageContent)) {
+				if(sender.getUserID()==message.getSender().getUserID()) {
+					messages.remove(messageFromList);
+				}
+			}
+			
+		}
 	}
 }

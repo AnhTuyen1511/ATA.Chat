@@ -41,12 +41,24 @@ class MessageServiceTest {
 		assertEquals(true, actualResult);
 	}
 	@Test
-	void getMessageByKeyword() {
-		User user = new User("anh", "password123");
+	void deleteMessageToReceiver() {
+		User user1 = new User("kate", "password123");
+		User user2 = new User("july", "password456");
+		User user3 = new User("john", "password789");
+		messageService.sendMessagetoReceiver(user1, user3, "hello anh");
+		Message message= new Message(user1, user3, "hello anh");
+		messageService.deleteMessage(message);
+		boolean actualResult=user3.getMessage(user3,"hello anh" );
+		assertEquals(false, actualResult);
+	}
+	@Test
+	void deleteMessageToGroup() {
+		User user = new User("JohnDoe", "password123");
 		PublicGroup group= new PublicGroup("balabla", false);
 		group.setMessages();
-		messageService.sendMessagetoGroup(user, group, "bla bla bla");
-		boolean actualResult=group.getMessage(user,"bla bla bla");
-		assertEquals(true, actualResult);
+		Message message= new Message(user, group, "hello group");
+		messageService.deleteMessage(message);
+		boolean actualResult=group.getMessage(user,"hello group" );
+		assertEquals(false, actualResult);
 	}
 }

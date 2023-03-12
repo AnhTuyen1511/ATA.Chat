@@ -122,7 +122,17 @@ public class User {
 	public void addMessage(Message message) {
 		messages.add(message);
 	}
-
+	public void removeMessage(User sender, Message message) {
+		for(Message messageFromList: messages) {
+			String contentOfMessage=message.getMessageContent();
+			if(contentOfMessage.equals(messageFromList.messageContent)) {
+				if(sender.getUserID()==message.getSender().getUserID()) {
+					messages.remove(messageFromList);
+				}
+			}
+			
+		}
+	}
 	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
 		List<Message> listMessases;
 		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
