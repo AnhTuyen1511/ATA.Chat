@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class User {
+
+import com.ata.service.TextService;
+public class User extends BaseEntity {
+
 	private int idMessage=0;
 	private String userID;
 	private String lastName;
@@ -36,6 +39,7 @@ public class User {
 	}
 
 	public User(String userName, String password) {
+
 		userName = userName;
 		password = hash(password);
 		messages = new ArrayList<>();
