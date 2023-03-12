@@ -11,9 +11,9 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class GroupService {
-
 	private final Database data;
 	UserService userService;
+
 
 	public GroupService(Database data) {
 		this.data = data;
@@ -100,6 +100,16 @@ public class GroupService {
 	
 	public Group getGroupByName(String groupName) {
 		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
+	}
+	private String generateJoinCode() {
+		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		Random random = new Random();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 6; i++) {
+			int index = random.nextInt(alphanumeric.length());
+			sb.append(alphanumeric.charAt(index));
+		}
+		return sb.toString();
 	}
 
 
