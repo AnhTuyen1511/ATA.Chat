@@ -84,8 +84,4 @@ public class GroupService {
 		return sb.toString();
 	}
 
-	public Group getGroupByName(String groupName) {
-		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
-	}
-
 }
