@@ -17,7 +17,14 @@ public abstract class Group {
 		this.users.add(user);
 	}
 
-	public ArrayList<User> getUsers() {
+//	public ArrayList<User> getUsers() {
+//	
+//	}
+
+	public void removeUser(User user) {
+		this.users.remove(user);
+	}
+	public ArrayList<User> getUsers(){
 		return this.users;
 	}
 
