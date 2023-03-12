@@ -30,23 +30,25 @@ public class User {
 		messages = new ArrayList<>();
 	}
 
-//	private String hash(String text) {
-//		TextService textService = new TextService();
-//		return textService.hashMD5(text);
-//	}
-//
-//	public User(String userName, String password) {
-//		userName = userName;
-//		password = hash(password);
-//	}
-//
-//	public boolean login(String password) {
-//		String hashedInputPass = hash(password);
-//		if (this.password.equals(hashedInputPass)) {
-//			return true;
-//		}
-//		return false;
-//	}
+	private String hash(String text) {
+		TextService textService = new TextService();
+		return textService.hashMD5(text);
+	}
+
+	public User(String userName, String password) {
+		userName = userName;
+		password = hash(password);
+		messages = new ArrayList<>();
+		files= new ArrayList<>();
+	}
+
+	public boolean login(String password) {
+		String hashedInputPass = hash(password);
+		if (this.password.equals(hashedInputPass)) {
+			return true;
+		}
+		return false;
+	}
 
 	public String getUserID() {
 		return userID;
