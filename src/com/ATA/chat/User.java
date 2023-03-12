@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import com.ata.service.TextService;
+
 public class User extends BaseEntity {
 	private String userID;
 	private String lastName;
