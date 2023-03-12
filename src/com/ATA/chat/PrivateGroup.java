@@ -11,6 +11,4 @@ public class PrivateGroup extends Group {
 	public void setAdmin(User admin) {
 		this.admin = admin;
 	}
-	
-	
 }

@@ -24,17 +24,17 @@ public class PublicGroup extends Group {
 	public void setJoinCode(String joinCode) {
 		this.joinCode = joinCode;
 	}
-	
-	public List<PublicGroup> getListPublicGroups(){
+
+	public List<PublicGroup> getListPublicGroups() {
 		Database database = new Database();
-		List<Group> listGroups=database.groups.listEntities;
+		List<Group> listGroups = database.groups.listEntities;
 		List<PublicGroup> listPublicGroups = new ArrayList<>();
 		for (int index = 0; index < listGroups.size(); index++) {
-			if(!listGroups.get(index).isPrivate()) {
-				listPublicGroups.add((PublicGroup)listGroups.get(index));
+			if (!listGroups.get(index).isPrivate()) {
+				listPublicGroups.add((PublicGroup) listGroups.get(index));
 			}
 		}
 		return listPublicGroups;
 	}
-	
+
 }
