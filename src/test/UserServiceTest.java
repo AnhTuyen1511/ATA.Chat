@@ -18,7 +18,7 @@ class UserServiceTest {
 
 	@Before
 	public void setUp() {
-		database = new Database();
+		database = Database.getInstance();
 		userService = new UserService(database);
 	}
 
@@ -31,7 +31,7 @@ class UserServiceTest {
 	@Test
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
-		database.getUsers().add(newUser);
+		database.getUsers().listEntities.add(newUser);
 
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);
@@ -45,7 +45,7 @@ class UserServiceTest {
 		database.getUsers().add(user1);
 		database.getUsers().add(user2);
 		database.getUsers().add(user3);
-
+		System.out.print(database.users);
 		List<User> expectedUsers = new ArrayList<>();
 		expectedUsers.add(user1);
 		expectedUsers.add(user2);

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import com.ata.service.TextService;
+
 public class User {
+	private int idMessage=0;
 	private String userID;
 	private String lastName;
 	private String firstName;
@@ -15,6 +16,7 @@ public class User {
 	private String dateOfBirth;
 	private String hashedPass;
 	private List<Message> messages;
+	private ArrayList<File> files;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
@@ -101,6 +103,15 @@ public class User {
 	public List<Message> getMessages() {
 		return messages;
 	}
+	public boolean getMessage(User user, String contentMessage) {
+		List<Message> messagesOfSender= new ArrayList<>();
+		for(Message message: messages) {
+			if(message.sender==user&&contentMessage.equals(message.messageContent)) {
+				return true;
+			}
+		}
+		return  false;
+	}
 
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
@@ -115,4 +126,9 @@ public class User {
 		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
 		return listMessases;
 	}
+	
+	
+	
+	
+	
 }

@@ -13,6 +13,7 @@ public abstract class Group {
 	public Group(String name) {
 		name = name;
 		this.users = new ArrayList<>();
+		messages= new ArrayList<>();
 	}
 
 	public void addUser(User user) {
@@ -59,8 +60,16 @@ public abstract class Group {
 		this.files = files;
 	}
 
-	public void setMessages(ArrayList<Message> messages) {
-		this.messages = messages;
+	public void setMessages() {
+		this.messages = new ArrayList<>();
 	}
-
+	public boolean getMessage(User user, String contentMessage) {
+		List<Message> messagesOfSender= new ArrayList<>();
+		for(Message message: messages) {
+			if(message.sender==user&&contentMessage.equals(message.messageContent)) {
+				return true;
+			}
+		}
+		return  false;
+	}
 }

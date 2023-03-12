@@ -11,7 +11,7 @@ import com.ata.data.Database;
 public class PublicGroup extends Group {
 	private String joinCode;
 
-	public PublicGroup(String name, String joinCode, boolean isPrivate) {
+	public PublicGroup(String name, boolean isPrivate) {
 		super(name);
 		joinCode = joinCode;
 		isPrivate = isPrivate;

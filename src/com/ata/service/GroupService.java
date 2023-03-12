@@ -15,9 +15,9 @@ public class GroupService {
 
 	public void createPublicGroup(String name) {
 		String joinCode = generateJoinCode();
-		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
+//		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
 		System.out.println(joinCode);
-		data.groups.add(publicGroup);
+//		data.groups.add(publicGroup);
 	
 	}
 
