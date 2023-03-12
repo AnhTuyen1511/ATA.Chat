@@ -43,4 +43,7 @@ public class UserService {
 		}
 		return attemptedUser.login(password); 
 	}
+	 public User getUser(String username){
+	        return data.getUsers().getFirst(u -> u.getUserName().equals(username));
+	    }
 }
