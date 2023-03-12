@@ -1,10 +1,5 @@
 package com.ata.chat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 
 public abstract class Group extends BaseEntity {
 	private String groupID;
@@ -17,7 +12,6 @@ public abstract class Group extends BaseEntity {
 	public Group(String name) {
 		this.name = name;
 		this.users = new ArrayList<>();
-		messages= new ArrayList<>();
 	}
 
 	public void addUser(User user) {
@@ -71,33 +65,8 @@ public abstract class Group extends BaseEntity {
 		this.files = files;
 	}
 
-	public void setMessages() {
-		this.messages = new ArrayList<>();
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
 	}
 
-	public boolean getMessage(User user, String contentMessage) {
-		List<Message> messagesOfSender= new ArrayList<>();
-		for(Message message: messages) {
-			if(message.sender==user&&contentMessage.equals(message.messageContent)) {
-				return true;
-			}
-		}
-		return  false;
-	}
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessases;
-		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
-		return listMessases;
-	}
-	public void removeMessage(User sender, Message message) {
-		for(Message messageFromList: messages) {
-			String contentOfMessage=message.getMessageContent();
-			if(contentOfMessage.equals(messageFromList.messageContent)) {
-				if(sender.getUserID()==message.getSender().getUserID()) {
-					messages.remove(messageFromList);
-				}
-			}
-			
-		}
-	}
 }
