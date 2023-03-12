@@ -101,7 +101,8 @@ public class GroupService {
 	public Group getGroupByName(String groupName) {
 		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
 	}
-	private String generateJoinCode() {
+	
+	public String generateJoinCode() {
 		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
