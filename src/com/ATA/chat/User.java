@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import com.ata.service.TextService;
-public class User {
+public class User extends BaseEntity {
 	private String userID;
 	private String lastName;
 	private String firstName;
@@ -34,8 +34,8 @@ public class User {
 	}
 
 	public User(String userName, String password) {
-		userName = userName;
-		password = hash(password);
+		this.userName = userName;
+		this.password = hash(password);
 	}
 
 	public boolean login(String password) {

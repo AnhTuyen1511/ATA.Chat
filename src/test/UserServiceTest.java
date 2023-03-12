@@ -5,20 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ata.chat.User;
 import com.ata.data.Database;
+import com.ata.data.InMemoryDatabase;
 import com.ata.service.UserService;
 
 class UserServiceTest {
 	private UserService userService;
 	private Database database;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
-		database = new Database();
+		database = InMemoryDatabase.getInstance();
 		userService = new UserService(database);
 	}
 
@@ -32,7 +33,6 @@ class UserServiceTest {
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
-
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);
 	}
@@ -66,9 +66,9 @@ class UserServiceTest {
 	public void testLoginFailure() {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
-
 		boolean result = userService.login("JohnDoe", "wrongpassword");
 		assertFalse(result);
 	}
 
 }
+

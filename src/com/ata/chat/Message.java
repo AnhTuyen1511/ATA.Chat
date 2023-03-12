@@ -2,7 +2,7 @@ package com.ata.chat;
 
 import java.util.UUID;
 
-public class Message {
+public class Message extends BaseEntity {
 	public String idMessage;
 	public User sender;
 	public String messageContent;
