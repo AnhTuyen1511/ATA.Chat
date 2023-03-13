@@ -128,4 +128,17 @@ class MessageServiceTest {
 		messageService.deleteMessage(message);
 		assertEquals(0, user2.getMessages().size());
 	}
+
+	void testSetAliaseName() {
+		User user1 = new User("JohnDoe", "password123");
+		User user2 = new User("Thomas", "password123");
+		messageService.setUserAlias(user1, user2, "Tom");
+		String expectedResult = "Tom";
+		String actualResult = messageService.getUserAlias(user1, user2);
+		
+		
+		assertEquals(expectedResult, actualResult);
+		
+	}
+
 }
