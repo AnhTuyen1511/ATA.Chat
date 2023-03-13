@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -28,11 +29,12 @@ class MessageServiceTest {
 		messageService = new MessageService(data);
 		groupService = new GroupService(data);
 	}
+
 	@AfterEach
-    void clearDatabase() {
-        data.groups.delete();
-        data.users.delete();
-    }
+	void clearDatabase() {
+		data.groups.delete();
+		data.users.delete();
+	}
 
 	@Test
 	void testSendMessageToReceicer() {
@@ -77,5 +79,19 @@ class MessageServiceTest {
 		messageService.deleteMessage(message);
 		boolean actualResult = group.getMessage(user, "hello group");
 		assertEquals(false, actualResult);
+	}
+
+	@Test
+	void testListGroupConversationOfUser() {
+		User user = new User("JohnDoe", "password123");
+		String joinCode = groupService.createPublicGroup("balabla");
+		assertTrue(groupService.joinGroup(user, joinCode));
+		String joinCode1 = groupService.createPublicGroup("balabla1");
+		assertTrue(groupService.joinGroup(user, joinCode1));
+		ArrayList<String> expectedList = new ArrayList<>();
+		expectedList.add("balabla");
+		expectedList.add("balabla1");
+		List<String> actualList = messageService.getListGroupConversationOfUser(user);
+		assertEquals(expectedList, actualList);
 	}
 }
