@@ -4,24 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-import com.ata.service.TextService;
-public class User {
-=======
-
-
-=======
->>>>>>> main
 import com.ata.service.TextService;
 
-<<<<<<< HEAD
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-	private int idMessage=0;
-=======
 public class User extends BaseEntity {
->>>>>>> main
 	private String userID;
 	private String lastName;
 	private String firstName;
@@ -49,24 +34,9 @@ public class User extends BaseEntity {
 	}
 
 	public User(String userName, String password) {
-<<<<<<< HEAD
-
-		userName = userName;
-		password = hash(password);
-		messages = new ArrayList<>();
-		files= new ArrayList<>();
-<<<<<<< HEAD
-
-		this.userName = userName;
-		this.password = hash(password);
-
-=======
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-=======
 		this.userName = userName;
 		this.password = hash(password);
 		messages = new ArrayList<Message>();
->>>>>>> main
 	}
 
 	public boolean login(String password) {
@@ -149,11 +119,16 @@ public class User extends BaseEntity {
 
 	public void addMessage(Message message) {
 		messages.add(message);
+
 	}
 
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessages;
-		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
+	public List<Message> getMessageByKeywords(String keyword) {
+		List<Message> listMessages = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.getMessageContent().contains(keyword)) {
+				listMessages.add(message);
+			}
+		}
 		return listMessages;
 	}
 }

@@ -38,13 +38,6 @@ class UserServiceTest {
 	@Test
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-=======
->>>>>>> main
 		database.getUsers().add(newUser);
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);

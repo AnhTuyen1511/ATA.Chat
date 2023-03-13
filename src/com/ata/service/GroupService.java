@@ -11,21 +11,8 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class GroupService {
-<<<<<<< HEAD
-	Database data = new Database();
 
-	public void createPublicGroup(String name) {
-		String joinCode = generateJoinCode();
-		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
-		System.out.println(joinCode);
-		data.groups.add(publicGroup);
-	
-	}
 
-	public void joinGroup(User user,String joinCode) {
-		 List <PublicGroup> listPublicGroups = getListPublicGroups();
-		
-=======
 	private final Database data;
 
 	public GroupService(Database data) {
@@ -42,28 +29,19 @@ public class GroupService {
 	public boolean joinGroup(User user, String joinCode) {
 		List<PublicGroup> listPublicGroups = getListPublicGroups();
 		boolean success = false;
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
 		for (int index = 0; index < listPublicGroups.size(); index++) {
 			if (listPublicGroups.get(index).getJoinCode().equals(joinCode)) {
 				listPublicGroups.get(index).addUser(user);
 			}
 		}
-<<<<<<< HEAD
+		return success;
 
-<<<<<<< HEAD
 	}
 	
-	public List<PublicGroup> getListPublicGroups(){
-		List<Group> listGroups=data.groups.listEntities;
-=======
-=======
->>>>>>> main
-		return success;
-	}
 
 	public List<PublicGroup> getListPublicGroups() {
 		List<Group> listGroups = data.groups.getListEntities();
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
+
 		List<PublicGroup> listPublicGroups = new ArrayList<>();
 		for (int index = 0; index < listGroups.size(); index++) {
 			if (!listGroups.get(index).isPrivate()) {
@@ -73,13 +51,9 @@ public class GroupService {
 		return listPublicGroups;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	public boolean removeUserFromGroup(User userID, String groupName) {
-=======
+
+	
 	public boolean removeUserFromGroup(User user, String groupName) {
->>>>>>> main
 		Group group;
 		group = this.getGroupByName(groupName);
 		if (group != null) {
@@ -104,13 +78,11 @@ public class GroupService {
 	public Group getGroupByName(String groupName) {
 		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
 	}
-<<<<<<< HEAD
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-	private String generateJoinCode() {
-=======
+
+
 	
 	public String generateJoinCode() {
->>>>>>> main
+
 		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
@@ -120,14 +92,5 @@ public class GroupService {
 		}
 		return sb.toString();
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
-<<<<<<< HEAD
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-
-=======
->>>>>>> main
 }

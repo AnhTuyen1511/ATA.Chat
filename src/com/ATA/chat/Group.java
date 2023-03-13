@@ -6,14 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
-
-=======
->>>>>>> main
 public abstract class Group extends BaseEntity {
 	private String groupID;
 	private String name;
@@ -84,7 +77,6 @@ public abstract class Group extends BaseEntity {
 		this.messages = messages;
 	}
 
-
 	public boolean getMessage(User user, String contentMessage) {
 		List<Message> messagesOfSender = new ArrayList<>();
 		for (Message message : messages) {
@@ -95,10 +87,15 @@ public abstract class Group extends BaseEntity {
 		return false;
 	}
 
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessases;
-		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
-		return listMessases;
+	public List<Message> getMessageByKeywords(String keyword) {
+		List<Message> listMessages = new ArrayList<>();
+		for (Message message : messages) {
+			String a = message.getMessageContent();
+			if (message.getMessageContent().contains(keyword)) {
+				listMessages.add(message);
+			}
+		}
+		return listMessages;
 	}
 
 	public void removeMessage(User sender, Message message) {
