@@ -40,7 +40,7 @@ class UserServiceTest {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
 		boolean result = userService.addUser("JohnDoe", "password123");
-		assertFalse(result);
+		assertFalse(result); 
 	}
 
 	@Test

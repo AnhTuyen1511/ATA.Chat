@@ -1,7 +1,9 @@
 package com.ata.chat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import com.ata.service.TextService;
@@ -15,6 +17,8 @@ public class User extends BaseEntity {
 	private String gender;
 	private String dateOfBirth;
 	private ArrayList<Message> messages;
+	private ArrayList<User> receivers;
+	private HashMap<User, String> aliases;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
@@ -26,6 +30,7 @@ public class User extends BaseEntity {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		messages = new ArrayList<Message>();
+		receivers = new ArrayList<>();
 	}
 
 	private String hash(String text) {
@@ -37,6 +42,8 @@ public class User extends BaseEntity {
 		this.userName = userName;
 		this.password = hash(password);
 		messages = new ArrayList<Message>();
+		receivers = new ArrayList<>();
+		aliases = new HashMap<User, String>();
 	}
 
 	public boolean login(String password) {
@@ -126,4 +133,45 @@ public class User extends BaseEntity {
 		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
 		return listMessages;
 	}
+
+	public ArrayList<User> getReceiver() {
+		return receivers;
+	}
+
+	public void setReceiver(ArrayList<User> receiver) {
+		this.receivers = receiver;
+	}
+
+	public void addConversation(User user) {
+		boolean flag = true;
+		for (User receiver : receivers) {
+			if (user.getId() == receiver.getId()) {
+				flag = false;
+				break;
+			}
+		}
+		if (flag) {
+			receivers.add(user);
+		}
+	}
+
+	public List<String> getConversions(User user) {
+		List<String> nameOfReceivers = new ArrayList<>();
+		for (User receiver : receivers) {
+			nameOfReceivers.add(receiver.userName);
+		}
+		return null;
+
+	}
+
+	public boolean setAlias(User assignee, String aliasName) {
+		aliases.put(assignee, aliasName);
+		return true;
+	}
+
+	public String getAlias(User assignee) {
+		String alias = aliases.get(assignee);
+		return alias;
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.ata.service;
 
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import com.ata.chat.File;
@@ -23,7 +22,7 @@ public class MessageService {
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
 		Message message = new Message(sender, group, messageContent);
 		group.getMessages().add(message);
-		
+
 	}
 
 	public void sendMessagetoReceiver(User sender, User receiver, String messageContent) {
@@ -31,36 +30,6 @@ public class MessageService {
 		receiver.getMessages().add(message);
 	}
 
-//	public void sendFile(User sender, Object recipient, File file) {
-//	    // save file to a folder with unique ID
-//	    String fileId = UUID.randomUUID().toString();
-//	    File newFile = new File("" + fileId);
-//	    // copy file to new location
-//	    Files.copy(file.toPath(), newFile.toPath());
-//	    Message message = new FileMessage(UUID.randomUUID(), sender, recipient, new Date());
-//	    saveMessage(message);
-//	    // send message to recipient
-//	}
-	
-	public List<Group> getGroupsOfUser(User user) {
-        List<Group> userGroups = new ArrayList<Group>();
-        for (Group group : groups) {
-            if (group.getUsers().contains(user)) {
-                userGroups.add(group);
-            }
-        }
-        return userGroups;
-    }
-	
-//	public List<Message> getListConversationOfUser(User user){
-//		List<Group> listGroupConversation = getGroupsOfUser(user);
-//		List<Message> listConversation;
-//		for(Group group : listGroupConversation) {
-//			
-//		}
-//		return null;
-//	}
-	
 	public List<Message> getTopLatestMessage(User sender, User receiver, int numberOfLatestMessages, int exception) {
 		List<Message> messagesOfSender = sender.getMessages();
 		List<Message> messagesOfReceiver = receiver.getMessages();
@@ -100,5 +69,37 @@ public class MessageService {
 	public List<File> getFilesInGroup(Group group) {
 		List<File> files = group.getFiles();
 		return files;
+	}
+
+	public List<String> getReceiverConversations(User user) {
+		List<String> conversations = user.getConversions(user);
+		return conversations;
+	}
+
+	public List<Group> getGroupsOfUser(User user) {
+		List<Group> userGroups = new ArrayList<Group>();
+		for (Group group : groups) {
+			if (group.getUsers().contains(user)) {
+				userGroups.add(group);
+			}
+		}
+		return userGroups;
+	}
+
+	public List<String> getListGroupConversationOfUser(User user) {
+		List<Group> listGroupConversation = getGroupsOfUser(user);
+		List<String> listConversation = new ArrayList<>();
+		for (Group group : listGroupConversation) {
+			listConversation.add(group.getName());
+		}
+		return listConversation;
+	}
+
+	public void setUserAlias(User assignor, User assignee, String aliasName) {
+		assignor.setAlias(assignee, aliasName);
+	}
+
+	public void getUserAlias(User assignor, User assignee) {
+		assignor.getAlias(assignee);
 	}
 }
