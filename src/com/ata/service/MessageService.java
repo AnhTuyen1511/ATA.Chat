@@ -11,12 +11,9 @@ import com.ata.data.Database;
 public class MessageService {
 	private final Database data;
 	private List<Group> groups;
-	private List<Message> messages;
 
 	public MessageService(Database data) {
 		this.data = data;
-		groups = data.groups.getListEntities();
-		messages = data.messages.getListEntities();
 	}
 
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
@@ -78,6 +75,7 @@ public class MessageService {
 
 	public List<Group> getGroupsOfUser(User user) {
 		List<Group> userGroups = new ArrayList<Group>();
+		groups = data.groups.getListEntities();
 		for (Group group : groups) {
 			if (group.getUsers().contains(user)) {
 				userGroups.add(group);
