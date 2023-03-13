@@ -5,20 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ata.chat.User;
 import com.ata.data.Database;
+import com.ata.data.InMemoryDatabase;
 import com.ata.service.UserService;
 
 class UserServiceTest {
 	private UserService userService;
 	private Database database;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
-		database = Database.getInstance();
+		database = InMemoryDatabase.getInstance();
 		userService = new UserService(database);
 	}
 
@@ -31,8 +32,7 @@ class UserServiceTest {
 	@Test
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
-		database.getUsers().listEntities.add(newUser);
-
+		database.getUsers().add(newUser);
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);
 	}
@@ -45,7 +45,7 @@ class UserServiceTest {
 		database.getUsers().add(user1);
 		database.getUsers().add(user2);
 		database.getUsers().add(user3);
-		System.out.print(database.users);
+
 		List<User> expectedUsers = new ArrayList<>();
 		expectedUsers.add(user1);
 		expectedUsers.add(user2);
@@ -66,9 +66,9 @@ class UserServiceTest {
 	public void testLoginFailure() {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
-
 		boolean result = userService.login("JohnDoe", "wrongpassword");
 		assertFalse(result);
 	}
 
 }
+

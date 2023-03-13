@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.ata.service.TextService;
 public class User {
 	private int idMessage=0;
 	private String userID;
@@ -36,10 +37,15 @@ public class User {
 	}
 
 	public User(String userName, String password) {
+
 		userName = userName;
 		password = hash(password);
 		messages = new ArrayList<>();
 		files= new ArrayList<>();
+
+		this.userName = userName;
+		this.password = hash(password);
+
 	}
 
 	public boolean login(String password) {
