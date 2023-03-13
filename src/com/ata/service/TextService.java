@@ -9,16 +9,14 @@ public class TextService {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] messageDigest = md.digest(password.getBytes());
-
 			BigInteger number = new BigInteger(1, messageDigest);
-
 			String hashtext = number.toString(16);
+			
 			while (hashtext.length() < 32) {
 				hashtext = "0" + hashtext;
 			}
 			return hashtext;
-		} 
-		catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
 	}

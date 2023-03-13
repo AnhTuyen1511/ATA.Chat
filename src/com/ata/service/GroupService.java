@@ -38,6 +38,7 @@ public class GroupService {
 	public List<PublicGroup> getListPublicGroups() {
 		List<Group> listGroups = data.groups.getListEntities();
 		List<PublicGroup> listPublicGroups = new ArrayList<>();
+		
 		for (int index = 0; index < listGroups.size(); index++) {
 			if (!listGroups.get(index).isPrivate()) {
 				listPublicGroups.add((PublicGroup) listGroups.get(index));
@@ -59,6 +60,7 @@ public class GroupService {
 	public Group getGroupById(String GroupID) {
 		List<Group> listGroups = data.groups.getListEntities();
 		Group tempGroup;
+		
 		for (int index = 0; index < listGroups.size(); index++) {
 			tempGroup = listGroups.get(index);
 			if (tempGroup.getGroupID().equalsIgnoreCase(GroupID)) {
@@ -67,11 +69,11 @@ public class GroupService {
 		}
 		return null;
 	}
-	
+
 	public Group getGroupByName(String groupName) {
 		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
 	}
-	
+
 	public String generateJoinCode() {
 		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		Random random = new Random();
@@ -82,5 +84,4 @@ public class GroupService {
 		}
 		return sb.toString();
 	}
-
 }

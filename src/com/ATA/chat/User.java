@@ -3,9 +3,6 @@ package com.ata.chat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import com.ata.service.TextService;
 
 public class User extends BaseEntity {
@@ -115,7 +112,6 @@ public class User extends BaseEntity {
 	}
 
 	public boolean getMessage(User user, String contentMessage) {
-		List<Message> messagesOfSender = new ArrayList<>();
 		for (Message message : messages) {
 			if (message.sender == user && contentMessage.equals(message.messageContent)) {
 				return true;
@@ -128,9 +124,13 @@ public class User extends BaseEntity {
 		messages.add(message);
 	}
 
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessages;
-		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
+	public List<Message> getMessageByKeywords(String keyword) {
+		List<Message> listMessages = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.getMessageContent().contains(keyword)) {
+				listMessages.add(message);
+			}
+		}
 		return listMessages;
 	}
 
@@ -155,13 +155,12 @@ public class User extends BaseEntity {
 		}
 	}
 
-	public List<String> getConversions(User user) {
+	public List<String> getConversations(User user) {
 		List<String> nameOfReceivers = new ArrayList<>();
 		for (User receiver : receivers) {
 			nameOfReceivers.add(receiver.userName);
 		}
 		return null;
-
 	}
 
 	public boolean setAlias(User assignee, String aliasName) {
@@ -173,5 +172,4 @@ public class User extends BaseEntity {
 		String alias = aliases.get(assignee);
 		return alias;
 	}
-
 }

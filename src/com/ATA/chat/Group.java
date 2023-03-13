@@ -3,9 +3,6 @@ package com.ata.chat;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.Random;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public abstract class Group extends BaseEntity {
 	private String groupID;
@@ -77,9 +74,7 @@ public abstract class Group extends BaseEntity {
 		this.messages = messages;
 	}
 
-
 	public boolean getMessage(User user, String contentMessage) {
-		List<Message> messagesOfSender = new ArrayList<>();
 		for (Message message : messages) {
 			if (message.sender == user && contentMessage.equals(message.messageContent)) {
 				return true;
@@ -88,10 +83,14 @@ public abstract class Group extends BaseEntity {
 		return false;
 	}
 
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessases;
-		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
-		return listMessases;
+	public List<Message> getMessageByKeywords(String keyword) {
+		List<Message> listMessages = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.getMessageContent().contains(keyword)) {
+				listMessages.add(message);
+			}
+		}
+		return listMessages;
 	}
 
 	public void removeMessage(User sender, Message message) {
@@ -102,7 +101,6 @@ public abstract class Group extends BaseEntity {
 					messages.remove(messageFromList);
 				}
 			}
-
 		}
 	}
 }

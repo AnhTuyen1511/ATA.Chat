@@ -14,5 +14,5 @@ public interface Repository<T> {
 	T getById(int id);
 
 	List<T> getListEntities();
-	
+
 }

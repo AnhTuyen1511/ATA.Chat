@@ -38,12 +38,8 @@ public class Message extends BaseEntity {
 		this.receiver = receiver;
 	}
 
-//	public String getIdMessage() {
-//		return idMessage;
-//	}
-
 	public void setIdMessage() {
-		this.idMessage = UUID.randomUUID().toString();;
+		this.idMessage = UUID.randomUUID().toString();
 	}
 
 	public void setReceiver(Object receiver) {
@@ -52,8 +48,8 @@ public class Message extends BaseEntity {
 
 	public Message findIdMessage(String idOfMessage) {
 		if (idOfMessage.equals(idMessage)) {
-		return this;
-		}else {
+			return this;
+		} else {
 			return null;
 		}
 	}

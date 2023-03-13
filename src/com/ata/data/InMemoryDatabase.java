@@ -13,7 +13,6 @@ public class InMemoryDatabase extends Database {
 		groups = new InMemoryRepository<Group>();
 		messages = new InMemoryRepository<Message>();
 	}
-	
 
 	public static InMemoryDatabase getInstance() {
 		if (database == null) {
@@ -21,5 +20,4 @@ public class InMemoryDatabase extends Database {
 		}
 		return database;
 	}
-
 }
