@@ -23,12 +23,12 @@ class UserServiceTest {
 		database = InMemoryDatabase.getInstance();
 		userService = new UserService(database);
 	}
-		
+
 	@AfterEach
-    void clearDatabase() {
-        database.users.delete();
-    }
-	
+	void clearDatabase() {
+		database.users.delete();
+	}
+
 	@Test
 	public void testAddUserSuccess() {
 		boolean result = userService.addUser("JohnDoe", "password123");
@@ -40,7 +40,8 @@ class UserServiceTest {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
 		boolean result = userService.addUser("JohnDoe", "password123");
-		assertFalse(result); 
+		
+		assertFalse(result);
 	}
 
 	@Test
@@ -56,6 +57,7 @@ class UserServiceTest {
 		expectedUsers.add(user1);
 		expectedUsers.add(user2);
 		List<User> actualUsers = userService.findUsersByUserName("Doe");
+		
 		assertEquals(expectedUsers, actualUsers);
 	}
 
@@ -63,8 +65,8 @@ class UserServiceTest {
 	public void testLoginSuccess() {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
-
 		boolean result = userService.login("JohnDoe", "password123");
+		
 		assertTrue(result);
 	}
 
@@ -73,8 +75,7 @@ class UserServiceTest {
 		User newUser = new User("JohnDoe", "password123");
 		database.getUsers().add(newUser);
 		boolean result = userService.login("JohnDoe", "wrongpassword");
+		
 		assertFalse(result);
 	}
-
 }
-

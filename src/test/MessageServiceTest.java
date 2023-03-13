@@ -41,6 +41,7 @@ class MessageServiceTest {
 		User user3 = new User("MarkSmith", "password789");
 		messageService.sendMessagetoReceiver(user2, user3, "hello banhbeo");
 		boolean actualResult = user3.getMessage(user2, "hello banhbeo");
+		
 		assertEquals(true, actualResult);
 	}
 
@@ -51,6 +52,7 @@ class MessageServiceTest {
 		PublicGroup group = new PublicGroup("balabla", joinCode, false);
 		messageService.sendMessagetoGroup(user, group, "bla bla bla");
 		boolean actualResult = group.getMessage(user, "bla bla bla");
+		
 		assertEquals(true, actualResult);
 	}
 
@@ -62,6 +64,7 @@ class MessageServiceTest {
 		Message message = new Message(user1, user3, "hello anh");
 		messageService.deleteMessage(message);
 		boolean actualResult = user3.getMessage(user3, "hello anh");
+		
 		assertEquals(false, actualResult);
 	}
 
@@ -73,6 +76,7 @@ class MessageServiceTest {
 		Message message = new Message(user, group, "hello group");
 		messageService.deleteMessage(message);
 		boolean actualResult = group.getMessage(user, "hello group");
+		
 		assertEquals(false, actualResult);
 	}
 
@@ -87,6 +91,7 @@ class MessageServiceTest {
 		expectedList.add("balabla");
 		expectedList.add("balabla1");
 		List<String> actualList = messageService.getListGroupConversationOfUser(user);
+		
 		assertEquals(expectedList, actualList);
 	}
 
@@ -98,6 +103,7 @@ class MessageServiceTest {
 		messageService.sendMessagetoReceiver(user2, user1, "hello beo");
 		int numberOfMessage = messageService.findMessageByKeywords(user1, user2, "hello");
 		int expectedResult = 2;
+		
 		assertEquals(expectedResult, numberOfMessage);
 	}
 
@@ -113,6 +119,7 @@ class MessageServiceTest {
 		messageService.sendMessagetoReceiver(user1, user2, "6");
 		messageService.sendMessagetoReceiver(user1, user2, "7");
 		List<Message> messages = messageService.getTopLatestMessage(user1, user2, 3, 1);
+		
 		assertEquals(3, messages.size());
 		assertEquals("6", messages.get(0).getMessageContent());
 		assertEquals("5", messages.get(1).getMessageContent());
@@ -126,6 +133,7 @@ class MessageServiceTest {
 		messageService.sendMessagetoReceiver(user1, user2, "Hello Jane!");
 		Message message = user2.getMessages().get(0);
 		messageService.deleteMessage(message);
+		
 		assertEquals(0, user2.getMessages().size());
 	}
 
@@ -135,10 +143,7 @@ class MessageServiceTest {
 		messageService.setUserAlias(user1, user2, "Tom");
 		String expectedResult = "Tom";
 		String actualResult = messageService.getUserAlias(user1, user2);
-		
-		
-		assertEquals(expectedResult, actualResult);
-		
-	}
 
+		assertEquals(expectedResult, actualResult);
+	}
 }

@@ -19,14 +19,13 @@ public class MessageService {
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
 		Message message = new Message(sender, group, messageContent);
 		group.getMessages().add(message);
-
 	}
 
 	public void sendMessagetoReceiver(User sender, User receiver, String messageContent) {
 		Message message = new Message(sender, receiver, messageContent);
 		receiver.getMessages().add(message);
 	}
-	
+
 	public List<Message> getTopLatestMessage(User sender, User receiver, int numberOfLatestMessages, int exception) {
 		List<Message> messagesOfReceiver = receiver.getMessages();
 		List<Message> topLatestMessage = new ArrayList<>();
@@ -62,7 +61,7 @@ public class MessageService {
 	}
 
 	public List<String> getReceiverConversations(User user) {
-		List<String> conversations = user.getConversions(user);
+		List<String> conversations = user.getConversations(user);
 		return conversations;
 	}
 

@@ -7,15 +7,15 @@ import com.ata.chat.User;
 import com.ata.data.Database;
 
 public class UserService {
-
 	private final Database data;
 
 	public UserService(Database database) {
 		data = database;
-	} 
+	}
 
 	public boolean addUser(String username, String password) {
 		User existing = data.getUsers().getFirst(user -> user.getUserName().equals(username));
+
 		if (existing != null) {
 			return false;
 		}
@@ -28,6 +28,7 @@ public class UserService {
 	public List<User> findUsersByUserName(String searchString) {
 		List<User> matchingUsers = new ArrayList<>();
 		List<User> users = data.users.getListEntities();
+
 		for (User user : users) {
 			if (user.getUserName().contains(searchString)) {
 				matchingUsers.add(user);
@@ -38,9 +39,10 @@ public class UserService {
 
 	public boolean login(String username, String password) {
 		User attemptedUser = data.getUsers().getFirst(user -> user.getUserName().equals(username));
+
 		if (attemptedUser == null) {
 			return false;
 		}
-		return attemptedUser.login(password); 
+		return attemptedUser.login(password);
 	}
 }

@@ -32,8 +32,8 @@ class GroupServiceTest {
 	void testCreatePublicGroup() {
 		String groupName = "Test Group";
 		groupService.createPublicGroup(groupName);
-
 		PublicGroup createdGroup = groupService.getListPublicGroups().get(0);
+		
 		assertEquals(groupName, createdGroup.getName());
 		assertNotNull(createdGroup.getJoinCode());
 		assertFalse(createdGroup.isPrivate());
@@ -43,10 +43,9 @@ class GroupServiceTest {
 	void testJoinGroup() {
 		String groupName = "Test Group";
 		String joinCode = groupService.createPublicGroup(groupName);
-
 		User user = new User("testUser", "password");
-
 		boolean result = groupService.joinGroup(user, joinCode);
+		
 		assertTrue(result);
 	}
 
@@ -54,10 +53,8 @@ class GroupServiceTest {
 	void testRemoveUserFromGroup() {
 		String groupName = "Test Group";
 		groupService.createPublicGroup(groupName);
-
 		PublicGroup group = groupService.getListPublicGroups().get(0);
 		User user = new User("testUser", "password");
-
 		group.addUser(user);
 
 		assertTrue(groupService.removeUserFromGroup(user, group.getName()));
@@ -73,7 +70,5 @@ class GroupServiceTest {
 		groupService.createPublicGroup(groupName2);
 
 		assertEquals(2, groupService.getListPublicGroups().size());
-		data.groups.delete();
 	}
-
 }
