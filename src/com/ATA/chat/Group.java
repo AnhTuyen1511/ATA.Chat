@@ -74,8 +74,8 @@ public abstract class Group extends BaseEntity {
 		this.files = files;
 	}
 
-	public void setMessages() {
-		this.messages = new ArrayList<>();
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
 	}
 
 

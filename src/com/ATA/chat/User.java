@@ -14,7 +14,7 @@ public class User extends BaseEntity {
 	private String password;
 	private String gender;
 	private String dateOfBirth;
-	private List<Message> messages;
+	private ArrayList<Message> messages;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
@@ -25,7 +25,7 @@ public class User extends BaseEntity {
 		this.password = password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
-		messages = new ArrayList<>();
+		messages = new ArrayList<Message>();
 	}
 
 	private String hash(String text) {
@@ -98,7 +98,11 @@ public class User extends BaseEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<Message> getMessages() {
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
+	}
+
+	public ArrayList<Message> getMessages() {
 		return messages;
 	}
 
@@ -112,17 +116,13 @@ public class User extends BaseEntity {
 		return false;
 	}
 
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
-	}
-
 	public void addMessage(Message message) {
 		messages.add(message);
 	}
 
 	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessases;
-		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
-		return listMessases;
+		List<Message> listMessages;
+		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
+		return listMessages;
 	}
 }

@@ -3,7 +3,6 @@ package com.ata.service;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import com.ata.chat.File;
 import com.ata.chat.Group;
 import com.ata.chat.Message;
@@ -20,6 +19,7 @@ public class MessageService {
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
 		Message message = new Message(sender, group, messageContent);
 		group.getMessages().add(message);
+		
 	}
 
 	public void sendMessagetoReceiver(User sender, User receiver, String messageContent) {

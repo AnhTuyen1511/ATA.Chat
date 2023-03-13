@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,6 @@ class MessageServiceTest {
 	Database data;
 	private MessageService messageService;
 	private GroupService groupService;
-	
 
 	@BeforeEach
 	void setUp() {
@@ -30,6 +30,11 @@ class MessageServiceTest {
 		messageService = new MessageService(data);
 		groupService = new GroupService(data);
 	}
+	@AfterEach
+    void clearDatabase() {
+        data.groups.delete();
+        data.users.delete();
+    }
 
 	@Test
 	void testSendMessageToReceicer() {
@@ -45,15 +50,15 @@ class MessageServiceTest {
 	void testSendMessageToGroup() {
 		User user = new User("anh", "password123");
 		String joinCode = groupService.generateJoinCode();
-		PublicGroup group= new PublicGroup("balabla",joinCode, false);
-		group.setMessages();
+		PublicGroup group = new PublicGroup("balabla", joinCode, false);
+//		group.setMessages();
 		messageService.sendMessagetoGroup(user, group, "bla bla bla");
-		boolean actualResult=group.getMessage(user,"bla bla bla");
+		boolean actualResult = group.getMessage(user, "bla bla bla");
 		assertEquals(true, actualResult);
 	}
 
 	@Test
-	void deleteMessageToReceiver() {
+	void testDeleteMessageToReceiver() {
 		User user1 = new User("kate", "password123");
 		User user2 = new User("july", "password456");
 		User user3 = new User("john", "password789");
@@ -65,11 +70,11 @@ class MessageServiceTest {
 	}
 
 	@Test
-	void deleteMessageToGroup() {
+	void testDeleteMessageToGroup() {
 		User user = new User("JohnDoe", "password123");
 		String joinCode = groupService.generateJoinCode();
-		PublicGroup group = new PublicGroup("balabla",joinCode, false);
-		group.setMessages();
+		PublicGroup group = new PublicGroup("balabla", joinCode, false);
+//		group.setMessages();
 		Message message = new Message(user, group, "hello group");
 		messageService.deleteMessage(message);
 		boolean actualResult = group.getMessage(user, "hello group");
