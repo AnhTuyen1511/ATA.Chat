@@ -20,7 +20,6 @@ public class GroupService {
 		String joinCode = generateJoinCode();
 		PublicGroup publicGroup = new PublicGroup(name, joinCode, false);
 		data.groups.add(publicGroup);
-		System.out.println(publicGroup.getName());
 		return joinCode;
 	}
 
