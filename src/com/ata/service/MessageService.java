@@ -26,16 +26,6 @@ public class MessageService {
 		Message message = new Message(sender, receiver, messageContent);
 		receiver.getMessages().add(message);
 	}
-
-	public List<Group> getGroupsOfUser(User user) {
-		List<Group> userGroups = new ArrayList<Group>();
-		for (Group group : groups) {
-			if (group.getUsers().contains(user)) {
-				userGroups.add(group);
-			}
-		}
-		return userGroups;
-	}
 	
 	public List<Message> getTopLatestMessage(User sender, User receiver, int numberOfLatestMessages, int exception) {
 		List<Message> messagesOfReceiver = receiver.getMessages();

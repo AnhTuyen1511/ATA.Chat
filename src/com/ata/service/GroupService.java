@@ -12,7 +12,6 @@ import com.ata.data.Database;
 
 public class GroupService {
 
-
 	private final Database data;
 
 	public GroupService(Database data) {
@@ -32,13 +31,11 @@ public class GroupService {
 		for (int index = 0; index < listPublicGroups.size(); index++) {
 			if (listPublicGroups.get(index).getJoinCode().equals(joinCode)) {
 				listPublicGroups.get(index).addUser(user);
+				success = true;
 			}
 		}
-		
 		return success;
-
 	}
-	
 
 	public List<PublicGroup> getListPublicGroups() {
 		List<Group> listGroups = data.groups.getListEntities();
@@ -52,8 +49,6 @@ public class GroupService {
 		return listPublicGroups;
 	}
 
-
-	
 	public boolean removeUserFromGroup(User user, String groupName) {
 		Group group;
 		group = this.getGroupByName(groupName);
@@ -75,13 +70,11 @@ public class GroupService {
 		}
 		return null;
 	}
-	
+
 	public Group getGroupByName(String groupName) {
 		return (Group) data.groups.getFirst(group -> group.getName().equalsIgnoreCase(groupName));
 	}
 
-
-	
 	public String generateJoinCode() {
 
 		String alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

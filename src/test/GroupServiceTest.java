@@ -48,7 +48,6 @@ class GroupServiceTest {
 
 		boolean result = groupService.joinGroup(user, joinCode);
 		assertTrue(result);
-		data.groups.delete();
 	}
 
 	@Test

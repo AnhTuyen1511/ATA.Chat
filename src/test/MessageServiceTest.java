@@ -38,7 +38,6 @@ class MessageServiceTest {
 
 	@Test
 	void testSendMessageToReceicer() {
-		User user1 = new User("JohnDoe", "password123");
 		User user2 = new User("JaneDoe", "password456");
 		User user3 = new User("MarkSmith", "password789");
 		messageService.sendMessagetoReceiver(user2, user3, "hello banhbeo");
@@ -59,7 +58,6 @@ class MessageServiceTest {
 	@Test
 	void testDeleteMessageToReceiver() {
 		User user1 = new User("kate", "password123");
-		User user2 = new User("july", "password456");
 		User user3 = new User("john", "password789");
 		messageService.sendMessagetoReceiver(user1, user3, "hello anh");
 		Message message = new Message(user1, user3, "hello anh");
@@ -83,14 +81,15 @@ class MessageServiceTest {
 	void testListGroupConversationOfUser() {
 		User user = new User("JohnDoe", "password123");
 		String joinCode = groupService.createPublicGroup("balabla");
-		assertTrue(groupService.joinGroup(user, joinCode));
+		groupService.joinGroup(user, joinCode);
 		String joinCode1 = groupService.createPublicGroup("balabla1");
-		assertTrue(groupService.joinGroup(user, joinCode1));
+		groupService.joinGroup(user, joinCode1);
 		ArrayList<String> expectedList = new ArrayList<>();
 		expectedList.add("balabla");
 		expectedList.add("balabla1");
 		List<String> actualList = messageService.getListGroupConversationOfUser(user);
 		assertEquals(expectedList, actualList);
+	}
 
 	@Test
 	void testFindKeyword() {
