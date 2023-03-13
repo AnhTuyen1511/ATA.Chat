@@ -94,4 +94,16 @@ class MessageServiceTest {
 		List<String> actualList = messageService.getListGroupConversationOfUser(user);
 		assertEquals(expectedList, actualList);
 	}
+
+	@Test
+	void testSetAliaseName() {
+		User user1 = new User("JohnDoe", "password123");
+		User user2 = new User("Thomas", "password123");
+		messageService.setUserAlias(user1, user2, "Tom");
+		String expectedResult = "Tom";
+		String actualResult = messageService.getUserAlias(user1, user2);
+		assertEquals(expectedResult, actualResult);
+		
+	}
+
 }
