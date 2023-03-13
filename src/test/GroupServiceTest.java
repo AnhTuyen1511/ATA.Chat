@@ -21,12 +21,12 @@ class GroupServiceTest {
 		data = InMemoryDatabase.getInstance();
 		groupService = new GroupService(data);
 	}
-	
+
 	@AfterEach
-    void clearDatabase() {
-        data.groups.delete();
-        data.users.delete();
-    }
+	void clearDatabase() {
+		data.groups.delete();
+		data.users.delete();
+	}
 
 	@Test
 	void testCreatePublicGroup() {
