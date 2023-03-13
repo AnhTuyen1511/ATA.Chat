@@ -102,6 +102,8 @@ class MessageServiceTest {
 		messageService.setUserAlias(user1, user2, "Tom");
 		String expectedResult = "Tom";
 		String actualResult = messageService.getUserAlias(user1, user2);
+		
+		
 		assertEquals(expectedResult, actualResult);
 		
 	}
