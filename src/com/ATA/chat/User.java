@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+<<<<<<< HEAD
 
 import com.ata.service.TextService;
 public class User {
+=======
+
+
+import com.ata.service.TextService;
+public class User extends BaseEntity {
+
+>>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
 	private int idMessage=0;
 	private String userID;
 	private String lastName;
@@ -42,10 +50,13 @@ public class User {
 		password = hash(password);
 		messages = new ArrayList<>();
 		files= new ArrayList<>();
+<<<<<<< HEAD
 
 		this.userName = userName;
 		this.password = hash(password);
 
+=======
+>>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
 	}
 
 	public boolean login(String password) {

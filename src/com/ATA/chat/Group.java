@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
 
 public abstract class Group extends BaseEntity {
 	private String groupID;
