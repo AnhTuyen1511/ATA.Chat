@@ -36,6 +36,7 @@ public class User extends BaseEntity {
 	public User(String userName, String password) {
 		this.userName = userName;
 		this.password = hash(password);
+		messages = new ArrayList<Message>();
 	}
 
 	public boolean login(String password) {

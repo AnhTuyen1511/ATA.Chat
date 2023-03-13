@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ata.chat.Group;
 import com.ata.chat.Message;
 import com.ata.chat.PublicGroup;
 import com.ata.chat.User;
@@ -17,7 +16,6 @@ import com.ata.data.Database;
 import com.ata.data.InMemoryDatabase;
 import com.ata.service.GroupService;
 import com.ata.service.MessageService;
-import com.ata.service.UserService;
 
 class MessageServiceTest {
 	Database data;

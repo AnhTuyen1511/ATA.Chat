@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.ata.chat.Group;
-import com.ata.chat.PrivateGroup;
 import com.ata.chat.PublicGroup;
 import com.ata.chat.User;
 import com.ata.data.Database;
