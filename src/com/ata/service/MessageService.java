@@ -11,7 +11,7 @@ import com.ata.data.Database;
 
 public class MessageService {
 	private final Database data;
-	
+
 	public MessageService(Database data) {
 		this.data = data;
 	}

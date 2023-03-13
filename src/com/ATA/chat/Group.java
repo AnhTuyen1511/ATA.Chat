@@ -19,7 +19,6 @@ public abstract class Group extends BaseEntity {
 		this.name = name;
 		this.users = new ArrayList<>();
 		messages = new ArrayList<>();
-
 	}
 
 	public void addUser(User user) {
