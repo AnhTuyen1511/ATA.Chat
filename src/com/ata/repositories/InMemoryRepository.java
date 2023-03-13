@@ -41,7 +41,7 @@ public class InMemoryRepository<T extends BaseEntity> implements Repository<T> {
 	public T getFirst(Predicate<T> predicate) {
 		Optional<T> entity = enities.stream().filter(predicate).findFirst();
 		return entity.isPresent() ? entity.get() : null;
-	}
+	} 
 
 	@Override
 	public T getById(int id) {

@@ -1,6 +1,7 @@
 package com.ata.chat;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class PublicGroup extends Group {
 	private String joinCode;
 
@@ -18,17 +19,20 @@ import java.util.Random;
 
 import com.ata.data.Database;
 
+=======
+>>>>>>> main
 public class PublicGroup extends Group {
 	private String joinCode;
 
-	public PublicGroup(String name,String joinCode, boolean isPrivate) {
+	public PublicGroup(String name, String joinCode, boolean isPrivate) {
 		super(name);
-
-		this.joinCode = generateJoinCode();
 		this.joinCode = joinCode;
 		this.setPrivate(isPrivate);
+<<<<<<< HEAD
 
 >>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
+=======
+>>>>>>> main
 	}
 
 	public String getJoinCode() {
@@ -38,6 +42,7 @@ public class PublicGroup extends Group {
 	public void setJoinCode(String joinCode) {
 		this.joinCode = joinCode;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -53,4 +58,6 @@ public class PublicGroup extends Group {
 	}
 
 >>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
+=======
+>>>>>>> main
 }

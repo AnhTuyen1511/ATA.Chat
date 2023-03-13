@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,12 @@ class UserServiceTest {
 		database = InMemoryDatabase.getInstance();
 		userService = new UserService(database);
 	}
-
+		
+	@AfterEach
+    void clearDatabase() {
+        database.users.delete();
+    }
+	
 	@Test
 	public void testAddUserSuccess() {
 		boolean result = userService.addUser("JohnDoe", "password123");
@@ -33,9 +39,12 @@ class UserServiceTest {
 	public void testAddUserFailure() {
 		User newUser = new User("JohnDoe", "password123");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 12859f6c6cbe6fa95cee910919b3d751fba2a899
+=======
+>>>>>>> main
 		database.getUsers().add(newUser);
 		boolean result = userService.addUser("JohnDoe", "password123");
 		assertFalse(result);

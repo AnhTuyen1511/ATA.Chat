@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +22,18 @@ class GroupServiceTest {
 		groupService = new GroupService(data);
 	}
 
+	@AfterEach
+	void clearDatabase() {
+		data.groups.delete();
+		data.users.delete();
+	}
+
 	@Test
 	void testCreatePublicGroup() {
 		String groupName = "Test Group";
 		groupService.createPublicGroup(groupName);
 
 		PublicGroup createdGroup = groupService.getListPublicGroups().get(0);
-
 		assertEquals(groupName, createdGroup.getName());
 		assertNotNull(createdGroup.getJoinCode());
 		assertFalse(createdGroup.isPrivate());
@@ -42,6 +48,7 @@ class GroupServiceTest {
 
 		boolean result = groupService.joinGroup(user, joinCode);
 		assertTrue(result);
+		data.groups.delete();
 	}
 
 	@Test
@@ -54,7 +61,7 @@ class GroupServiceTest {
 
 		group.addUser(user);
 
-		assertFalse(groupService.removeUserFromGroup(user, group.getName()));
+		assertTrue(groupService.removeUserFromGroup(user, group.getName()));
 	}
 
 	@Test
@@ -67,6 +74,7 @@ class GroupServiceTest {
 		groupService.createPublicGroup(groupName2);
 
 		assertEquals(2, groupService.getListPublicGroups().size());
+		data.groups.delete();
 	}
 
 }
