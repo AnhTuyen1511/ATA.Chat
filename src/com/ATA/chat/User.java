@@ -126,11 +126,16 @@ public class User extends BaseEntity {
 
 	public void addMessage(Message message) {
 		messages.add(message);
+
 	}
 
-	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessages;
-		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
+	public List<Message> getMessageByKeywords(String keyword) {
+		List<Message> listMessages = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.getMessageContent().contains(keyword)) {
+				listMessages.add(message);
+			}
+		}
 		return listMessages;
 	}
 

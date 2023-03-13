@@ -51,7 +51,6 @@ class MessageServiceTest {
 		User user = new User("anh", "password123");
 		String joinCode = groupService.generateJoinCode();
 		PublicGroup group = new PublicGroup("balabla", joinCode, false);
-//		group.setMessages();
 		messageService.sendMessagetoGroup(user, group, "bla bla bla");
 		boolean actualResult = group.getMessage(user, "bla bla bla");
 		assertEquals(true, actualResult);
@@ -74,7 +73,6 @@ class MessageServiceTest {
 		User user = new User("JohnDoe", "password123");
 		String joinCode = groupService.generateJoinCode();
 		PublicGroup group = new PublicGroup("balabla", joinCode, false);
-//		group.setMessages();
 		Message message = new Message(user, group, "hello group");
 		messageService.deleteMessage(message);
 		boolean actualResult = group.getMessage(user, "hello group");
@@ -93,5 +91,43 @@ class MessageServiceTest {
 		expectedList.add("balabla1");
 		List<String> actualList = messageService.getListGroupConversationOfUser(user);
 		assertEquals(expectedList, actualList);
+
+	@Test
+	void testFindKeyword() {
+		User user1 = new User("beo", "password123");
+		User user2 = new User("teo", "ak123456");
+		messageService.sendMessagetoReceiver(user1, user2, "hello teo");
+		messageService.sendMessagetoReceiver(user2, user1, "hello beo");
+		int numberOfMessage = messageService.findMessageByKeywords(user1, user2, "hello");
+		int expectedResult = 2;
+		assertEquals(expectedResult, numberOfMessage);
+	}
+
+	@Test
+	public void testGetTopLatestMessage() {
+		User user1 = new User("anh", "kimanh123");
+		User user2 = new User("anhkim", "anhkim123");
+		messageService.sendMessagetoReceiver(user1, user2, "1");
+		messageService.sendMessagetoReceiver(user1, user2, "2");
+		messageService.sendMessagetoReceiver(user1, user2, "3");
+		messageService.sendMessagetoReceiver(user1, user2, "4");
+		messageService.sendMessagetoReceiver(user1, user2, "5");
+		messageService.sendMessagetoReceiver(user1, user2, "6");
+		messageService.sendMessagetoReceiver(user1, user2, "7");
+		List<Message> messages = messageService.getTopLatestMessage(user1, user2, 3, 1);
+		assertEquals(3, messages.size());
+		assertEquals("6", messages.get(0).getMessageContent());
+		assertEquals("5", messages.get(1).getMessageContent());
+		assertEquals("4", messages.get(2).getMessageContent());
+	}
+
+	@Test
+	public void testDeleteMessage() {
+		User user1 = new User("anh", "kimanh123");
+		User user2 = new User("anhkim", "anhkim123");
+		messageService.sendMessagetoReceiver(user1, user2, "Hello Jane!");
+		Message message = user2.getMessages().get(0);
+		messageService.deleteMessage(message);
+		assertEquals(0, user2.getMessages().size());
 	}
 }

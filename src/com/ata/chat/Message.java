@@ -13,7 +13,6 @@ public class Message extends BaseEntity {
 		this.messageContent = messageContent;
 		this.receiver = receiver;
 	}
-
 	public User getSender() {
 		return sender;
 	}
