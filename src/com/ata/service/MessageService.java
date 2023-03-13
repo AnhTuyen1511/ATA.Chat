@@ -11,9 +11,13 @@ import com.ata.data.Database;
 
 public class MessageService {
 	private final Database data;
+	private List<Group> groups;
+	private List<Message> messages;
 
 	public MessageService(Database data) {
 		this.data = data;
+		groups = data.groups.getListEntities();
+		messages = data.messages.getListEntities();
 	}
 
 	public void sendMessagetoGroup(User sender, Group group, String messageContent) {
@@ -37,7 +41,26 @@ public class MessageService {
 //	    saveMessage(message);
 //	    // send message to recipient
 //	}
-
+	
+	public List<Group> getGroupsOfUser(User user) {
+        List<Group> userGroups = new ArrayList<Group>();
+        for (Group group : groups) {
+            if (group.getUsers().contains(user)) {
+                userGroups.add(group);
+            }
+        }
+        return userGroups;
+    }
+	
+//	public List<Message> getListConversationOfUser(User user){
+//		List<Group> listGroupConversation = getGroupsOfUser(user);
+//		List<Message> listConversation;
+//		for(Group group : listGroupConversation) {
+//			
+//		}
+//		return null;
+//	}
+	
 	public List<Message> getTopLatestMessage(User sender, User receiver, int numberOfLatestMessages, int exception) {
 		List<Message> messagesOfSender = sender.getMessages();
 		List<Message> messagesOfReceiver = receiver.getMessages();
