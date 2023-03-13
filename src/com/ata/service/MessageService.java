@@ -99,7 +99,7 @@ public class MessageService {
 		assignor.setAlias(assignee, aliasName);
 	}
 
-	public void getUserAlias(User assignor,User assignee) {
+	public void getUserAlias(User assignor, User assignee) {
 		assignor.getAlias(assignee);
 	}
 }
