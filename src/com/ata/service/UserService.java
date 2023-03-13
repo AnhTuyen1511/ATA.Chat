@@ -12,7 +12,7 @@ public class UserService {
 
 	public UserService(Database database) {
 		data = database;
-	}
+	} 
 
 	public boolean addUser(String username, String password) {
 		User existing = data.getUsers().getFirst(user -> user.getUserName().equals(username));
@@ -21,7 +21,7 @@ public class UserService {
 		}
 
 		User newUser = new User(username, password);
-		data.getUsers().add(newUser);
+		data.users.add(newUser);
 		return true;
 	}
 
@@ -41,9 +41,6 @@ public class UserService {
 		if (attemptedUser == null) {
 			return false;
 		}
-		return attemptedUser.login(password);
+		return attemptedUser.login(password); 
 	}
-	 public User getUser(String username){
-	        return data.getUsers().getFirst(u -> u.getUserName().equals(username));
-	    }
 }

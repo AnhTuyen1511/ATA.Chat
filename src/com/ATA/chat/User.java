@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-
 import com.ata.service.TextService;
-public class User extends BaseEntity {
 
-	private int idMessage=0;
+public class User extends BaseEntity {
 	private String userID;
 	private String lastName;
 	private String firstName;
@@ -17,9 +14,7 @@ public class User extends BaseEntity {
 	private String password;
 	private String gender;
 	private String dateOfBirth;
-	private String hashedPass;
-	private List<Message> messages;
-	private ArrayList<File> files;
+	private ArrayList<Message> messages;
 
 	public User(String userID, String lastName, String firstName, String userName, String password, String gender,
 			String dateOfBirth) {
@@ -30,7 +25,7 @@ public class User extends BaseEntity {
 		this.password = password;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
-		messages = new ArrayList<>();
+		messages = new ArrayList<Message>();
 	}
 
 	private String hash(String text) {
@@ -39,11 +34,9 @@ public class User extends BaseEntity {
 	}
 
 	public User(String userName, String password) {
-
-		userName = userName;
-		password = hash(password);
-		messages = new ArrayList<>();
-		files= new ArrayList<>();
+		this.userName = userName;
+		this.password = hash(password);
+		messages = new ArrayList<Message>();
 	}
 
 	public boolean login(String password) {
@@ -106,46 +99,31 @@ public class User extends BaseEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<Message> getMessages() {
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
+	}
+
+	public ArrayList<Message> getMessages() {
 		return messages;
 	}
-	
+
 	public boolean getMessage(User user, String contentMessage) {
-		List<Message> messagesOfSender= new ArrayList<>();
-		for(Message message: messages) {
-			if(message.sender==user&&contentMessage.equals(message.messageContent)) {
+		List<Message> messagesOfSender = new ArrayList<>();
+		for (Message message : messages) {
+			if (message.sender == user && contentMessage.equals(message.messageContent)) {
 				return true;
 			}
 		}
-		return  false;
-	}
-
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
+		return false;
 	}
 
 	public void addMessage(Message message) {
 		messages.add(message);
 	}
-	public void removeMessage(User sender, Message message) {
-		for(Message messageFromList: messages) {
-			String contentOfMessage=message.getMessageContent();
-			if(contentOfMessage.equals(messageFromList.messageContent)) {
-				if(sender.getUserID()==message.getSender().getUserID()) {
-					messages.remove(messageFromList);
-				}
-			}
-			
-		}
-	}
+
 	public List<Message> getMessageByKeywords(Predicate<Message> predicate) {
-		List<Message> listMessases;
-		listMessases = messages.stream().filter(predicate).collect(Collectors.toList());
-		return listMessases;
+		List<Message> listMessages;
+		listMessages = messages.stream().filter(predicate).collect(Collectors.toList());
+		return listMessages;
 	}
-	
-	
-	
-	
-	
 }

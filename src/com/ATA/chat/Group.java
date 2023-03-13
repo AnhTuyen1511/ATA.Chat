@@ -1,6 +1,7 @@
 package com.ata.chat;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -72,9 +73,10 @@ public abstract class Group extends BaseEntity {
 		this.files = files;
 	}
 
-	public void setMessages() {
-		this.messages = new ArrayList<>();
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
 	}
+
 
 	public boolean getMessage(User user, String contentMessage) {
 		List<Message> messagesOfSender = new ArrayList<>();
